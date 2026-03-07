@@ -3,83 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOH STORE | FULL WOLF EDITIONS</title>
+    <title>MOH STORE | WOLF</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Cairo', sans-serif; background: #0b0f1a; color: white; overflow-x: hidden; }
+        body { font-family: 'Cairo', sans-serif; background: #050810; color: white; min-height: 100vh; }
+        .wolf-gradient { background: linear-gradient(135deg, #ff8a05 0%, #ff05a0 50%, #0570ff 100%); }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .shimmer { position: relative; overflow: hidden; }
         .shimmer::after {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg); animation: shine 3s infinite;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: rotate(45deg); animation: shine 4s infinite;
         }
         @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
-        .fade-up { animation: fadeUp 0.6s ease-out forwards; opacity: 0; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-6 flex flex-col items-center">
 
-    <header class="text-center my-10 fade-up">
-        <h1 class="text-4xl font-black bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent italic tracking-tighter uppercase">MOH STORE</h1>
-        <div class="h-1 w-32 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mx-auto mt-2 rounded-full shadow-[0_0_20px_rgba(236,72,153,0.4)]"></div>
+    <header class="text-center my-12">
+        <div class="inline-block p-[2px] rounded-full wolf-gradient mb-4">
+            <div class="bg-[#050810] rounded-full p-2">
+                <img src="wolf.png" class="w-16 h-16 object-contain" alt="Logo">
+            </div>
+        </div>
+        <h1 class="text-4xl font-black tracking-tighter italic uppercase bg-gradient-to-r from-[#ff8a05] via-[#ff05a0] to-[#0570ff] bg-clip-text text-transparent">MOH STORE</h1>
+        <p class="text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase mt-2">Premium IPA Hosting</p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto pb-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full px-2">
         
-        <div class="fade-up bg-slate-900/80 border border-slate-800 p-5 rounded-[2rem] flex items-center group hover:border-blue-500/50 transition-all shadow-xl" style="animation-delay: 0.1s">
-            <div class="shimmer w-16 h-16 bg-blue-600 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden shadow-lg shadow-blue-900/20">
-                <img src="wolf_icon.png" onerror="this.src='https://via.placeholder.com/100/1e293b/FFFFFF?text=12.0'" class="w-full h-full object-cover">
-            </div>
-            <div class="mr-4 flex-1 text-right">
-                <h2 class="text-sm font-black text-white">Wolf Qanawat 12.0</h2>
-                <p class="text-[9px] text-gray-500 font-bold mb-2 uppercase italic">Stable Edition</p>
-                <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F3198797563b91b3001f7ac4665ea206b" 
-                   class="block w-full bg-blue-600 text-center py-2 rounded-xl text-[10px] font-black active:scale-95 transition-all hover:bg-blue-500 shadow-lg shadow-blue-600/30">تثبيت 12.0</a>
-            </div>
-        </div>
+        <script>
+            const versions = [
+                { v: "12.0", id: "3198797563b91b3001f7ac4665ea206b" },
+                { v: "12.0.1", id: "1ce031952ac54f99bccd6b5f3d64d5d5" },
+                { v: "12.0.2", id: "4498deea9dac4127eef6e6ffdf02dc45" },
+                { v: "12.0.3", id: "fd9dcab4f9a4dbfe401a706889149747" }
+            ];
 
-        <div class="fade-up bg-slate-900/80 border border-slate-800 p-5 rounded-[2rem] flex items-center group hover:border-indigo-500/50 transition-all shadow-xl" style="animation-delay: 0.2s">
-            <div class="shimmer w-16 h-16 bg-indigo-600 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden shadow-lg shadow-indigo-900/20">
-                <img src="wolf_icon.png" onerror="this.src='https://via.placeholder.com/100/1e293b/FFFFFF?text=12.1'" class="w-full h-full object-cover">
-            </div>
-            <div class="mr-4 flex-1 text-right">
-                <h2 class="text-sm font-black text-white">Wolf Qanawat 12.0.1</h2>
-                <p class="text-[9px] text-gray-500 font-bold mb-2 uppercase italic">Official Update</p>
-                <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F1ce031952ac54f99bccd6b5f3d64d5d5" 
-                   class="block w-full bg-indigo-600 text-center py-2 rounded-xl text-[10px] font-black active:scale-95 transition-all hover:bg-indigo-500 shadow-lg shadow-indigo-600/30">تثبيت 12.0.1</a>
-            </div>
-        </div>
-
-        <div class="fade-up bg-slate-900/80 border border-slate-800 p-5 rounded-[2rem] flex items-center group hover:border-purple-500/50 transition-all shadow-xl" style="animation-delay: 0.3s">
-            <div class="shimmer w-16 h-16 bg-purple-600 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden shadow-lg shadow-purple-900/20">
-                <img src="wolf_icon.png" onerror="this.src='https://via.placeholder.com/100/1e293b/FFFFFF?text=12.2'" class="w-full h-full object-cover">
-            </div>
-            <div class="mr-4 flex-1 text-right">
-                <h2 class="text-sm font-black text-white">Wolf Qanawat 12.0.2</h2>
-                <p class="text-[9px] text-gray-500 font-bold mb-2 uppercase italic">Premium Build</p>
-                <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F4498deea9dac4127eef6e6ffdf02dc45" 
-                   class="block w-full bg-purple-600 text-center py-2 rounded-xl text-[10px] font-black active:scale-95 transition-all hover:bg-purple-500 shadow-lg shadow-purple-600/30">تثبيت 12.0.2</a>
-            </div>
-        </div>
-
-        <div class="fade-up bg-slate-900/80 border border-slate-800 p-5 rounded-[2rem] flex items-center group hover:border-pink-500/50 transition-all shadow-xl" style="animation-delay: 0.4s">
-            <div class="shimmer w-16 h-16 bg-pink-600 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden shadow-lg shadow-pink-900/20">
-                <img src="wolf_icon.png" onerror="this.src='https://via.placeholder.com/100/1e293b/FFFFFF?text=12.3'" class="w-full h-full object-cover">
-            </div>
-            <div class="mr-4 flex-1 text-right">
-                <h2 class="text-sm font-black text-white">Wolf Qanawat 12.0.3</h2>
-                <p class="text-[9px] text-gray-500 font-bold mb-2 uppercase italic">Latest Release</p>
-                <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2Ffd9dcab4f9a4dbfe401a706889149747" 
-                   class="block w-full bg-pink-600 text-center py-2 rounded-xl text-[10px] font-black active:scale-95 transition-all hover:bg-pink-500 shadow-lg shadow-pink-600/30">تثبيت 12.0.3</a>
-            </div>
-        </div>
+            versions.forEach(app => {
+                document.write(`
+                    <div class="glass-card p-5 rounded-[2.5rem] flex items-center group transition-all duration-500 hover:bg-white/5">
+                        <div class="shimmer w-20 h-20 bg-slate-900 rounded-3xl flex-shrink-0 flex items-center justify-center p-2 shadow-2xl">
+                            <img src="wolf.png" class="w-full h-full object-contain group-hover:scale-110 transition-transform">
+                        </div>
+                        <div class="mr-5 flex-1 text-right">
+                            <h2 class="text-lg font-black italic tracking-tight">WOLF ${app.v}</h2>
+                            <p class="text-[8px] text-gray-500 font-bold mb-3 uppercase tracking-widest">Version Verified</p>
+                            <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F${app.id}" 
+                               class="wolf-gradient block w-full text-center py-2.5 rounded-2xl text-[10px] font-black shadow-lg active:scale-95 transition-all">
+                               تـثـبـيـت
+                            </a>
+                        </div>
+                    </div>
+                `);
+            });
+        </script>
 
     </div>
 
-    <footer class="text-center mt-10 text-slate-700 text-[9px] font-bold tracking-[0.2em] uppercase">
-        Fully Hosted on Pgyer • Managed by MOH70001
+    <footer class="mt-20 text-center">
+        <a href="https://t.me/MOH70001" class="glass-card px-8 py-3 rounded-2xl text-[10px] font-black text-gray-400 hover:text-white transition-all uppercase tracking-widest">
+            Contact @MOH70001
+        </a>
+        <p class="text-[8px] text-slate-800 font-bold mt-10">© 2026 MOH STORE • PGYER ENGINE</p>
     </footer>
 
 </body>
