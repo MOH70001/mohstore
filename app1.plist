@@ -17,13 +17,13 @@
             <key>metadata</key>
             <dict>
                 <key>bundle-identifier</key>
-                <string>com.wolf.mohstore</string>
+                <string>com.parlingo.parlingo</string>
                 <key>bundle-version</key>
                 <string>12.0.1</string>
                 <key>kind</key>
                 <string>software</string>
                 <key>title</key>
-                <string>Wolf App</string>
+                <string>Wolf Parlingo</string>
             </dict>
         </dict>
     </array>
