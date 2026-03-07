@@ -7,55 +7,44 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Cairo', sans-serif; background: #0f172a; color: white; overflow-x: hidden; }
-        /* حركة اللمعان على الأيقونة */
+        body { font-family: 'Cairo', sans-serif; background: #0f172a; color: white; }
         .shimmer { position: relative; overflow: hidden; }
         .shimmer::after {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
             transform: rotate(45deg); animation: shine 3s infinite;
         }
         @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
-        /* انميشن ظهور العناصر */
         .fade-up { animation: fadeUp 0.8s ease-out forwards; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="flex flex-col items-center justify-start min-h-screen p-6">
-
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-blue-600/20 blur-[100px] -z-10"></div>
+<body class="flex flex-col items-center min-h-screen p-6">
 
     <header class="text-center my-12 fade-up">
-        <h1 class="text-5xl font-black bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent italic">MOH STORE</h1>
-        <p class="text-gray-400 mt-2 font-bold tracking-widest">PREMIUM IPA STORE</p>
+        <h1 class="text-5xl font-black bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">MOH STORE</h1>
     </header>
 
-    <div class="w-full max-w-sm space-y-6">
-        
-        <div class="fade-up bg-slate-800/50 backdrop-blur-xl border border-slate-700 p-5 rounded-[2.5rem] shadow-2xl flex items-center hover:border-blue-500/50 transition-all duration-500 group">
+    <div class="w-full max-w-sm">
+        <div class="fade-up bg-slate-800/50 backdrop-blur-xl border border-slate-700 p-5 rounded-[2.5rem] shadow-2xl flex items-center group">
             
-            <div class="shimmer w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl shadow-lg flex items-center justify-center text-4xl font-black group-hover:scale-110 transition-transform">
-                W
+            <div class="shimmer w-20 h-20 rounded-3xl shadow-lg flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform">
+                <img src="wolf_icon.png" alt="Wolf Icon" class="w-full h-full object-cover">
             </div>
 
             <div class="mr-5 flex-1 text-right">
                 <h2 class="text-xl font-black text-white">Wolf Parlingo</h2>
-                <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full font-bold">VIP VERSION</span>
+                <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full font-bold">VIP EDITION</span>
                 
                 <div class="mt-4">
                     <a href="itms-services://?action=download-manifest&url=https://moh70001.github.io/MOHSTORE/app1.plist" 
-                       class="inline-block w-full bg-white text-slate-900 text-center py-2.5 rounded-2xl font-black text-sm active:scale-90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:bg-blue-500 hover:text-white">
-                       تـثـبـيـت الآن
+                       class="inline-block w-full bg-white text-slate-900 text-center py-2.5 rounded-2xl font-black text-sm active:scale-90 transition-all shadow-lg hover:bg-blue-500 hover:text-white">
+                       تـثـبـيـت
                     </a>
                 </div>
             </div>
         </div>
-
     </div>
-
-    <footer class="mt-auto pt-10 text-gray-600 text-[10px] font-bold tracking-tighter fade-up">
-        DESIGNED BY MOH70001 • 2026
-    </footer>
 
 </body>
 </html>
