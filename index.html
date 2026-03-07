@@ -28,11 +28,10 @@
             </div>
         </div>
         <h1 class="text-4xl font-black tracking-tighter italic uppercase bg-gradient-to-r from-[#ff8a05] via-[#ff05a0] to-[#0570ff] bg-clip-text text-transparent">MOH STORE</h1>
-        <p class="text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase mt-2">Premium IPA Hosting</p>
+        <p class="text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase mt-2">متجر تطبيقات ولف الرسمي</p>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full px-2">
-        
         <script>
             const versions = [
                 { v: "12.0", id: "3198797563b91b3001f7ac4665ea206b" },
@@ -40,7 +39,6 @@
                 { v: "12.0.2", id: "4498deea9dac4127eef6e6ffdf02dc45" },
                 { v: "12.0.3", id: "fd9dcab4f9a4dbfe401a706889149747" }
             ];
-
             versions.forEach(app => {
                 document.write(`
                     <div class="glass-card p-5 rounded-[2.5rem] flex items-center group transition-all duration-500 hover:bg-white/5">
@@ -48,25 +46,28 @@
                             <img src="wolf.png.JPG" class="w-full h-full object-contain group-hover:scale-110 transition-transform">
                         </div>
                         <div class="mr-5 flex-1 text-right">
-                            <h2 class="text-lg font-black italic tracking-tight">WOLF ${app.v}</h2>
-                            <p class="text-[8px] text-gray-500 font-bold mb-3 uppercase tracking-widest">Version Verified</p>
+                            <h2 class="text-lg font-black italic">WOLF ${app.v}</h2>
+                            <p class="text-[8px] text-gray-500 font-bold mb-3 uppercase tracking-widest italic">نسخة معتمدة</p>
                             <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F${app.id}" 
                                class="wolf-gradient block w-full text-center py-2.5 rounded-2xl text-[10px] font-black shadow-lg active:scale-95 transition-all">
-                               تـثـبـيـت
+                               تـثـبـيـت الآن
                             </a>
                         </div>
                     </div>
                 `);
             });
         </script>
-
     </div>
 
-    <footer class="mt-20 text-center">
-        <a href="https://t.me/MOH70001" class="glass-card px-8 py-3 rounded-2xl text-[10px] font-black text-gray-400 hover:text-white transition-all uppercase tracking-widest">
-            Contact @MOH70001
+    <footer class="mt-20 text-center pb-12">
+        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.3em] mb-4">للدعم الفني والاستفسارات</p>
+        <a href="https://wa.me/966538506619?text=أهلاً محمد، أحتاج مساعدة بخصوص متجر ولف" 
+           target="_blank"
+           class="inline-flex items-center gap-3 bg-[#25D366]/10 border border-[#25D366]/30 px-10 py-4 rounded-[2rem] group hover:bg-[#25D366] transition-all duration-500">
+           <span class="text-sm font-black text-[#25D366] group-hover:text-white transition-colors">تواصل معي واتساب</span>
         </a>
     </footer>
 
 </body>
 </html>
+ي
