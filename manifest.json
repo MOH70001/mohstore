@@ -1,0 +1,20 @@
+{
+  "short_name": "MOH STORE",
+  "name": "MOH STORE VIP - WOLF",
+  "icons": [
+    {
+      "src": "wolf.png.JPG",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "wolf.png.JPG",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#02040a",
+  "background_color": "#02040a"
+}
