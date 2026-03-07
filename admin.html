@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم MOH Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4 font-['Cairo']">
+
+    <div class="max-w-md mx-auto">
+        <h1 class="text-2xl font-bold text-center mb-8 text-blue-600">إدارة المتجر 🛠️</h1>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm mb-6">
+            <h2 class="font-bold mb-4 border-b pb-2 text-gray-700">إضافة مشترك جديد</h2>
+            <input id="userName" type="text" placeholder="اسم المشترك" class="w-full p-3 mb-3 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500">
+            <input id="userUDID" type="text" placeholder="رقم الـ UDID" class="w-full p-3 mb-4 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500">
+            <button onclick="addSubscriber()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold shadow-lg active:scale-95 transition">تفعيل الاشتراك</button>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm">
+            <h2 class="font-bold mb-4 border-b pb-2 text-gray-700">رفع تطبيق IPA جديد</h2>
+            <input id="appName" type="text" placeholder="اسم التطبيق (مثلاً: WhatsApp+)" class="w-full p-3 mb-3 border rounded-xl text-sm outline-none">
+            <input id="appVersion" type="text" placeholder="الإصدار" class="w-full p-3 mb-3 border rounded-xl text-sm outline-none">
+            <input id="appIPA" type="file" accept=".ipa" class="w-full p-3 mb-4 border border-dashed rounded-xl text-xs text-gray-500">
+            <button onclick="uploadApp()" class="w-full bg-green-500 text-white py-3 rounded-xl font-bold shadow-lg active:scale-95 transition">رفع ونشر التطبيق</button>
+        </div>
+
+        <div id="status" class="mt-4 text-center text-sm font-bold"></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-storage-compat.js"></script>
+
+    <script>
+        // هنا سنضع كود الإعداد (Firebase Config) في الخطوة القادمة
+    </script>
+</body>
+</html>
