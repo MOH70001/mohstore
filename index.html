@@ -1,71 +1,128 @@
-<script>
-    const groups = [
-        { name: "يناير - 01", key: "1111" },
-        { name: "فبراير - 02", key: "2222" },
-        { name: "مارس - 03", key: "3333" },
-        { name: "أبريل - 04", key: "4444" },
-        { name: "مايو - 05", key: "5555" },
-        { name: "يونيو - 06", key: "6666" },
-        { name: "يوليو - 07", key: "7777" },
-        { name: "أغسطس - 08", key: "8888" },
-        { name: "سبتمبر - 09", key: "9999" },
-        { name: "أكتوبر - 10", key: "1010" },
-        { name: "نوفمبر - 11", key: "1100" },
-        { name: "ديسمبر - 12", key: "1212" }
-    ];
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>MOH STORE | ACCESS FIXED</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background: #02040a; color: white; min-height: 100vh; margin: 0; padding: 0; }
+        .wolf-gradient { background: linear-gradient(135deg, #ff8a05 0%, #ff05a0 50%, #0570ff 100%); }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; padding: 20px; }
+        .modal.active { display: flex; }
+    </style>
+</head>
+<body class="p-6">
 
-    const files = [
-        { n: "Wolf 12.0", id: "3198797563b91b3001f7ac4665ea206b" },
-        { n: "Wolf 12.0.1", id: "1ce031952ac54f99bccd6b5f3d64d5d5" },
-        { n: "Wolf 12.0.2", id: "4498deea9dac4127eef6e6ffdf02dc45" },
-        { n: "Wolf 12.0.3", id: "fd9dcab4f9a4dbfe401a706889149747" }
-    ];
-
-    let selectedGroup = null;
-
-    const grid = document.getElementById('monthsGrid');
-    groups.forEach(g => {
-        grid.innerHTML += `
-            <div onclick="openPassBox('${g.name}', '${g.key}')" class="glass p-6 rounded-[2rem] text-center cursor-pointer hover:bg-white/5 transition-all">
-                <div class="text-sm font-black uppercase tracking-tighter">${g.name}</div>
-                <div class="text-[9px] text-gray-500 font-bold mt-2 italic text-pink-500">دخول آمن VIP</div>
+    <header class="text-center my-10">
+        <div class="inline-block p-[2px] rounded-full wolf-gradient mb-4">
+            <div class="bg-[#02040a] rounded-full p-2">
+                <img src="wolf.png.JPG" class="w-20 h-20 object-contain rounded-full" alt="Logo">
             </div>
-        `;
-    });
+        </div>
+        <h1 class="text-4xl font-black italic bg-gradient-to-r from-[#ff8a05] to-[#0570ff] bg-clip-text text-transparent uppercase">MOH STORE</h1>
+    </header>
 
-    function openPassBox(name, key) {
-        selectedGroup = { name, key };
-        document.getElementById('targetMonth').innerText = name;
-        document.getElementById('passInput').value = "";
-        document.getElementById('passModal').classList.add('active');
-    }
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto" id="monthsGrid"></div>
 
-    function verifyCode() {
-        const inputVal = document.getElementById('passInput').value.trim();
-        if (inputVal === selectedGroup.key) {
-            document.getElementById('passModal').classList.remove('active');
-            showDownloadLinks(selectedGroup.name);
-        } else {
-            alert("الرمز خطأ! حاول مرة أخرى");
+    <div id="passModal" class="modal">
+        <div class="glass w-full max-w-sm rounded-[2.5rem] p-10 text-center">
+            <h2 id="targetMonth" class="text-xl font-black mb-6 italic text-white"></h2>
+            <input type="text" id="passInput" placeholder="أدخل الرمز" 
+                   class="w-full bg-white/10 border border-white/20 rounded-2xl py-4 text-center text-white text-2xl mb-6 outline-none">
+            <button onclick="verifyCode()" class="wolf-gradient w-full py-4 rounded-2xl font-black shadow-xl text-white">تأكيد الدخول</button>
+            <button onclick="closePassModal()" class="mt-6 text-xs text-gray-500 font-bold uppercase">إلغاء</button>
+        </div>
+    </div>
+
+    <div id="filesModal" class="modal">
+        <div class="glass w-full max-w-md rounded-[3rem] p-8 relative">
+            <button onclick="closeFilesModal()" class="absolute top-6 left-6 text-white text-xl">✕</button>
+            <div class="text-center mb-8">
+                <h2 id="activeMonthTitle" class="text-xl font-black italic"></h2>
+                <p class="text-[10px] text-green-500 font-bold mt-2 uppercase tracking-widest">تم السماح بالدخول ✅</p>
+            </div>
+            <div class="space-y-3" id="filesList"></div>
+        </div>
+    </div>
+
+    <script>
+        // مصفوفة الشهور بالعربي مع الرموز
+        const groups = [
+            { name: "يناير - 01", key: "1111" },
+            { name: "فبراير - 02", key: "2222" },
+            { name: "مارس - 03", key: "3333" },
+            { name: "أبريل - 04", key: "4444" },
+            { name: "مايو - 05", key: "5555" },
+            { name: "يونيو - 06", key: "6666" },
+            { name: "يوليو - 07", key: "7777" },
+            { name: "أغسطس - 08", key: "8888" },
+            { name: "سبتمبر - 09", key: "9999" },
+            { name: "أكتوبر - 10", key: "1010" },
+            { name: "نوفمبر - 11", key: "1100" },
+            { name: "ديسمبر - 12", key: "1212" }
+        ];
+
+        const files = [
+            { n: "Wolf 12.0", id: "3198797563b91b3001f7ac4665ea206b" },
+            { n: "Wolf 12.0.1", id: "1ce031952ac54f99bccd6b5f3d64d5d5" },
+            { n: "Wolf 12.0.2", id: "4498deea9dac4127eef6e6ffdf02dc45" },
+            { n: "Wolf 12.0.3", id: "fd9dcab4f9a4dbfe401a706889149747" }
+        ];
+
+        let selectedGroup = null;
+
+        // بناء الشبكة فور تحميل الصفحة
+        window.onload = function() {
+            const grid = document.getElementById('monthsGrid');
+            grid.innerHTML = ''; // تفريغ الشبكة أولاً
+            groups.forEach(g => {
+                grid.innerHTML += `
+                    <div onclick="openPassBox('${g.name}', '${g.key}')" class="glass p-6 rounded-[2rem] text-center cursor-pointer hover:bg-white/5 transition-all">
+                        <div class="text-sm font-black uppercase tracking-tighter">${g.name}</div>
+                        <div class="text-[9px] text-gray-500 font-bold mt-2 italic text-pink-500">دخول آمن VIP</div>
+                    </div>
+                `;
+            });
+        };
+
+        function openPassBox(name, key) {
+            selectedGroup = { name, key };
+            document.getElementById('targetMonth').innerText = name;
+            document.getElementById('passInput').value = "";
+            document.getElementById('passModal').classList.add('active');
         }
-    }
 
-    function showDownloadLinks(name) {
-        document.getElementById('activeMonthTitle').innerText = name;
-        const list = document.getElementById('filesList');
-        list.innerHTML = '';
-        files.forEach(f => {
-            list.innerHTML += `
-                <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F${f.id}" 
-                   class="flex items-center justify-between bg-white/5 p-5 rounded-2xl border border-white/5 transition-all active:scale-95">
-                    <span class="text-[12px] font-black italic tracking-wide">${f.n}</span>
-                    <span class="text-[10px] font-black wolf-gradient px-4 py-2 rounded-xl shadow-lg">تثبيت الآن</span>
-                </a>
-            `;
-        });
-        document.getElementById('filesModal').classList.add('active');
-    }
+        function verifyCode() {
+            const inputVal = document.getElementById('passInput').value.trim();
+            if (inputVal === selectedGroup.key) {
+                document.getElementById('passModal').classList.remove('active');
+                showDownloadLinks(selectedGroup.name);
+            } else {
+                alert("الرمز خطأ! حاول مرة أخرى");
+            }
+        }
 
-    function closePassModal() { document.getElementById('passModal').classList.remove('active'); }
-    function closeFilesModal() { document.getElementById('filesModal').classList.remove('active'); }
-</script>
+        function showDownloadLinks(name) {
+            document.getElementById('activeMonthTitle').innerText = name;
+            const list = document.getElementById('filesList');
+            list.innerHTML = '';
+            files.forEach(f => {
+                list.innerHTML += `
+                    <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F${f.id}" 
+                       class="flex items-center justify-between bg-white/5 p-5 rounded-2xl border border-white/5 transition-all active:scale-95">
+                        <span class="text-[12px] font-black italic tracking-wide">${f.n}</span>
+                        <span class="text-[10px] font-black wolf-gradient px-4 py-2 rounded-xl shadow-lg text-white">تثبيت الآن</span>
+                    </a>
+                `;
+            });
+            document.getElementById('filesModal').classList.add('active');
+        }
+
+        function closePassModal() { document.getElementById('passModal').classList.remove('active'); }
+        function closeFilesModal() { document.getElementById('filesModal').classList.remove('active'); }
+    </script>
+</body>
+</html>
