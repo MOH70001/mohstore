@@ -7,53 +7,133 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Cairo', sans-serif; background: #02040a; color: white; min-height: 100vh; margin: 0; }
-        .wolf-gradient { background: linear-gradient(135deg, #ff8a05 0%, #ff05a0 50%, #0570ff 100%); }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; padding: 20px; }
-        .modal.active { display: flex; }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: #02040a; 
+            color: white; 
+            min-height: 100vh; 
+            margin: 0; 
+            overflow-x: hidden;
+        }
+        
+        /* تدرج الألوان الخاص بالذئب */
+        .wolf-gradient { 
+            background: linear-gradient(135deg, #ff8a05 0%, #ff05a0 50%, #0570ff 100%); 
+        }
+
+        /* تصميم الزجاج */
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        /* تصميم المربعات (الأشهر) المطور */
+        .month-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .month-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 138, 5, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #25D366;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 12px #25D366;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            z-index: 100; 
+            background: rgba(0,0,0,0.92); 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+            backdrop-filter: blur(10px);
+        }
+        .modal.active { display: flex; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* تحسين مظهر الأزرار */
+        .btn-install {
+            background: linear-gradient(90deg, #ff8a05, #ff05a0);
+            box-shadow: 0 4px 15px rgba(255, 5, 160, 0.3);
+        }
     </style>
 </head>
-<body class="p-6 pb-32"> <header class="text-center my-10">
-        <div class="inline-block p-[2px] rounded-full wolf-gradient mb-4">
+<body class="p-4 pb-32">
+
+    <header class="text-center my-12">
+        <div class="inline-block p-[3px] rounded-full wolf-gradient mb-6 shadow-[0_0_30px_rgba(255,138,5,0.3)]">
             <div class="bg-[#02040a] rounded-full p-2">
-                <img src="Logo.png.JPG" class="w-20 h-20 object-contain rounded-full" onerror="this.src='wolf.png.JPG'">
+                <img src="Logo.png.JPG" class="w-24 h-24 object-contain rounded-full" onerror="this.src='wolf.png.JPG'">
             </div>
         </div>
-        <h1 class="text-4xl font-black italic bg-gradient-to-r from-[#ff8a05] to-[#0570ff] bg-clip-text text-transparent uppercase text-center">MOH STORE</h1>
-        <p class="text-[10px] text-gray-500 mt-2 tracking-[0.2em]">PRIVATE ACCESS SYSTEM</p>
+        <h1 class="text-5xl font-black italic bg-gradient-to-r from-[#ff8a05] via-[#ff05a0] to-[#0570ff] bg-clip-text text-transparent uppercase tracking-tighter">MOH STORE</h1>
+        <p class="text-[11px] text-gray-500 mt-3 tracking-[0.4em] font-bold">PRIVATE ACCESS • VIP SYSTEM</p>
     </header>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto" id="monthsGrid"></div>
 
-    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-xs px-4">
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-xs px-6">
         <a href="https://wa.me/966538506619" target="_blank" 
-           class="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white py-4 rounded-2xl shadow-[0_10px_30px_rgba(37,211,102,0.3)] transition-all active:scale-95 font-bold italic text-sm">
+           class="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1eb954] text-white py-4 rounded-[2rem] shadow-[0_15px_40px_rgba(37,211,102,0.4)] transition-all active:scale-90 font-black italic text-sm border-t border-white/20">
             <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.165 1.237 8.413 3.484 2.248 2.248 3.484 5.237 3.484 8.415 0 6.556-5.332 11.887-11.888 11.887-2.019 0-4.003-.513-5.767-1.485l-6.229 1.696zm6.069-4.303l.369.219c1.61.955 3.478 1.459 5.4 1.459 5.732 0 10.395-4.663 10.395-10.395s-4.663-10.395-10.395-10.395-10.395 4.663-10.395 10.395c0 2.062.583 4.072 1.687 5.824l.24.379-1.107 4.04 4.14-1.128zm10.748-7.357c-.246-.123-1.458-.719-1.684-.8-.226-.081-.391-.123-.555.123-.164.246-.636.8-.78 0-.144-.164-.288-.205-.534-.328-.246-.123-.746-.35-1.408-.94-.515-.458-.863-1.025-.964-1.189-.101-.164-.011-.252.089-.373.09-.109.205-.246.308-.369.103-.123.136-.205.205-.344.068-.14.034-.26-.017-.384-.052-.123-.555-1.339-.76-1.832-.2-.48-.403-.414-.555-.421-.143-.007-.308-.008-.472-.008-.164 0-.432.061-.657.307-.226.246-.863.843-.863 2.054 0 1.21.882 2.38 1.005 2.545.123.164 1.734 2.648 4.199 3.712.586.254 1.044.405 1.4.517.589.187 1.125.161 1.549.097.472-.072 1.458-.596 1.664-1.172.206-.576.206-1.07.144-1.172-.062-.103-.226-.164-.472-.286z"/></svg>
-            للتواصل 
+            تواصل مع الإدارة
         </a>
     </div>
 
     <div id="passModal" class="modal">
-        <div class="glass w-full max-w-sm rounded-[2.5rem] p-10 text-center">
-            <h2 id="targetMonth" class="text-xl font-black mb-6 italic text-white"></h2>
-            <input type="text" id="passInput" placeholder="أدخل رمز الفئة" 
-                   class="w-full bg-white/10 border border-white/20 rounded-2xl py-4 text-center text-white text-2xl mb-6 outline-none">
-            <button onclick="verifyUser()" class="wolf-gradient w-full py-4 rounded-2xl font-black shadow-xl text-white">تأكيد الدخول</button>
-            <button onclick="closePassModal()" class="mt-6 text-xs text-gray-500 font-bold uppercase cursor-pointer">إلغاء</button>
+        <div class="glass w-full max-w-sm rounded-[3rem] p-10 text-center border-t border-white/20">
+            <div class="wolf-gradient w-16 h-1 w-full mx-auto rounded-full mb-8 opacity-50"></div>
+            <h2 id="targetMonth" class="text-2xl font-black mb-2 italic text-white uppercase"></h2>
+            <p class="text-gray-500 text-[10px] mb-8 tracking-widest font-bold uppercase">Enter Access Key</p>
+            <input type="text" id="passInput" placeholder="••••••" 
+                   class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 text-center text-white text-3xl mb-8 outline-none focus:border-[#ff8a05] transition-all tracking-widest font-black">
+            <button onclick="verifyUser()" class="wolf-gradient w-full py-5 rounded-2xl font-black shadow-2xl text-white active:scale-95 transition-transform uppercase italic tracking-wider">تأكيد الدخول</button>
+            <button onclick="closePassModal()" class="mt-8 text-[10px] text-gray-500 font-bold uppercase cursor-pointer hover:text-white transition-colors tracking-[0.3em]">إغلاق النافذة</button>
         </div>
     </div>
 
     <div id="filesModal" class="modal">
-        <div class="glass w-full max-w-md rounded-[3rem] p-8 relative">
-            <button onclick="closeFilesModal()" class="absolute top-6 left-6 text-white text-xl">✕</button>
-            <div class="text-center mb-8">
-                <h2 id="welcomeMessage" class="text-xl font-black text-white italic"></h2>
-                <div class="inline-block mt-4 px-4 py-1 rounded-full bg-green-500/20 border border-green-500/50">
-                    <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest">تم تفعيل الوصول ✅</span>
+        <div class="glass w-full max-w-md rounded-[3.5rem] p-8 relative border-t border-white/20 shadow-2xl">
+            <button onclick="closeFilesModal()" class="absolute top-8 left-8 text-gray-400 hover:text-white transition-colors">✕</button>
+            <div class="text-center mb-10">
+                <div class="inline-block p-1 rounded-full border border-green-500/30 mb-4">
+                   <div class="bg-green-500/10 px-4 py-1 rounded-full flex items-center gap-2">
+                       <span class="status-dot"></span>
+                       <span class="text-[9px] text-green-500 font-black uppercase tracking-widest">Access Granted</span>
+                   </div>
                 </div>
+                <h2 id="welcomeMessage" class="text-2xl font-black text-white italic uppercase tracking-tighter"></h2>
             </div>
-            <div class="space-y-3" id="filesList"></div>
+            <div class="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scroll" id="filesList"></div>
         </div>
     </div>
 
@@ -84,10 +164,19 @@
 
         const grid = document.getElementById('monthsGrid');
         groups.forEach(g => {
+            const parts = g.name.split(' - ');
             grid.innerHTML += `
-                <div onclick="openPassBox('${g.name}')" class="glass p-8 rounded-[2rem] text-center cursor-pointer hover:scale-105 transition-all active:scale-95 shadow-lg">
-                    <div class="text-sm font-black uppercase tracking-widest text-white">${g.name}</div>
-                    <div class="text-[8px] text-pink-500 font-bold mt-2 tracking-widest italic">اشتراك سنوي VIP</div>
+                <div onclick="openPassBox('${g.name}')" class="month-card p-8 rounded-[2.5rem] text-center cursor-pointer group border-t border-white/5">
+                    <div class="mb-4 opacity-40 group-hover:opacity-100 transition-all">
+                        <span class="status-dot"></span>
+                    </div>
+                    <div class="text-xl font-black uppercase text-white group-hover:text-[#ff8a05] transition-colors tracking-tighter">
+                        ${parts[0]}
+                        <span class="block text-[9px] text-gray-500 font-bold mt-1 opacity-60 tracking-[0.3em]">${parts[1]}</span>
+                    </div>
+                    <div class="mt-5 inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/5 group-hover:wolf-gradient transition-all shadow-xl">
+                        <span class="text-[8px] text-white font-black uppercase tracking-widest italic">Private VIP</span>
+                    </div>
                 </div>
             `;
         });
@@ -103,7 +192,7 @@
             const inputVal = document.getElementById('passInput').value.trim();
             if (inputVal === "rafa 2027") {
                 document.getElementById('passModal').classList.remove('active');
-                showDownloadLinks("مرحباً بك يا مدير rafa");
+                showDownloadLinks("WELCOME ADMIN RAFA");
                 return;
             }
             if (inputVal === selectedGroup.key) {
@@ -114,7 +203,7 @@
                     return;
                 }
                 document.getElementById('passModal').classList.remove('active');
-                showDownloadLinks("تم تفعيل اشتراك VIP ✅");
+                showDownloadLinks("ACCESS ACTIVATED ✅");
             } else {
                 alert("الرمز غير صحيح لهذه الفئة!");
             }
@@ -127,9 +216,12 @@
             files.forEach(f => {
                 list.innerHTML += `
                     <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F${f.id}" 
-                       class="flex items-center justify-between bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all active:scale-95">
-                        <span class="text-[12px] font-black italic tracking-wider">${f.n}</span>
-                        <span class="text-[10px] font-black wolf-gradient px-4 py-2 rounded-xl shadow-lg text-white">تثبيت</span>
+                       class="flex items-center justify-between bg-white/5 p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all active:scale-95 group">
+                        <div class="flex flex-col">
+                            <span class="text-[13px] font-black italic tracking-wider text-white">${f.n}</span>
+                            <span class="text-[8px] text-gray-500 font-bold uppercase tracking-widest mt-1">Ready for installation</span>
+                        </div>
+                        <span class="text-[10px] font-black btn-install px-5 py-2.5 rounded-2xl shadow-lg text-white uppercase italic">تثبيت</span>
                     </a>
                 `;
             });
