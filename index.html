@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>MOH STORE | نظام المشتركين</title>
+    <title>MOH STORE | ACCESS FIXED</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -28,7 +28,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto" id="monthsGrid"></div>
 
     <div id="passModal" class="modal">
-        <div class="glass w-full max-sm rounded-[2.5rem] p-10 text-center">
+        <div class="glass w-full max-w-sm rounded-[2.5rem] p-10 text-center">
             <h2 id="targetMonth" class="text-xl font-black mb-6 italic text-white text-center"></h2>
             <input type="text" id="passInput" placeholder="أدخل الكود الخاص بك" 
                    class="w-full bg-white/10 border border-white/20 rounded-2xl py-4 text-center text-white text-2xl mb-6 outline-none">
@@ -52,9 +52,8 @@
     </div>
 
     <script>
-        // قاعدة بيانات المشتركين - يناير فقط
         const groups = [
-            { name: "يناير - 01", users: [{ name: "مودير كبير", key: "23695604" }] },
+            { name: "يناير - 01", users: [{ name: "مودير كبير", key: "1236" }] },
             { name: "فبراير - 02", users: [] },
             { name: "مارس - 03", users: [] },
             { name: "أبريل - 04", users: [] },
@@ -68,9 +67,12 @@
             { name: "ديسمبر - 12", users: [] }
         ];
 
+        // هنا أضفنا الملفات الأربعة كاملة
         const files = [
             { n: "Wolf 12.0", id: "3198797563b91b3001f7ac4665ea206b" },
-            { n: "Wolf 12.0.1", id: "1ce031952ac54f99bccd6b5f3d64d5d5" }
+            { n: "Wolf 12.0.1", id: "1ce031952ac54f99bccd6b5f3d64d5d5" },
+            { n: "Wolf 12.0.2", id: "4498deea9dac4127eef6e6ffdf02dc45" },
+            { n: "Wolf 12.0.3", id: "fd9dcab4f9a4dbfe401a706889149747" }
         ];
 
         let selectedGroup = null;
@@ -95,7 +97,6 @@
         function verifyUser() {
             const inputVal = document.getElementById('passInput').value.trim();
             const user = selectedGroup.users.find(u => u.key === inputVal);
-            
             if (user) {
                 document.getElementById('passModal').classList.remove('active');
                 showDownloadLinks(user.name, selectedGroup.name);
@@ -107,7 +108,6 @@
         function showDownloadLinks(userName, monthName) {
             document.getElementById('welcomeMessage').innerText = "أهلاً بك، " + userName;
             document.getElementById('activeMonthTitle').innerText = "تم التحقق من شهر " + monthName;
-            
             const list = document.getElementById('filesList');
             list.innerHTML = '';
             files.forEach(f => {
