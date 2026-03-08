@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>MOH STORE | ACCESS FIXED</title>
+    <title>MOH STORE | VIP SYSTEM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -19,18 +19,19 @@
     <header class="text-center my-10">
         <div class="inline-block p-[2px] rounded-full wolf-gradient mb-4">
             <div class="bg-[#02040a] rounded-full p-2">
-                <img src="wolf.png.JPG" class="w-20 h-20 object-contain rounded-full" onerror="this.src='https://via.placeholder.com/80?text=MOH'">
+                <img src="Logo.png.JPG" class="w-20 h-20 object-contain rounded-full" onerror="this.src='wolf.png.JPG'">
             </div>
         </div>
         <h1 class="text-4xl font-black italic bg-gradient-to-r from-[#ff8a05] to-[#0570ff] bg-clip-text text-transparent uppercase text-center">MOH STORE</h1>
+        <p class="text-[10px] text-gray-500 mt-2 tracking-[0.2em]">PRIVATE ACCESS SYSTEM</p>
     </header>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto" id="monthsGrid"></div>
 
     <div id="passModal" class="modal">
         <div class="glass w-full max-w-sm rounded-[2.5rem] p-10 text-center">
-            <h2 id="targetMonth" class="text-xl font-black mb-6 italic text-white text-center"></h2>
-            <input type="text" id="passInput" placeholder="أدخل الكود الخاص بك" 
+            <h2 id="targetMonth" class="text-xl font-black mb-6 italic text-white"></h2>
+            <input type="text" id="passInput" placeholder="أدخل رمز الفئة" 
                    class="w-full bg-white/10 border border-white/20 rounded-2xl py-4 text-center text-white text-2xl mb-6 outline-none">
             <button onclick="verifyUser()" class="wolf-gradient w-full py-4 rounded-2xl font-black shadow-xl text-white">تأكيد الدخول</button>
             <button onclick="closePassModal()" class="mt-6 text-xs text-gray-500 font-bold uppercase cursor-pointer">إلغاء</button>
@@ -41,10 +42,9 @@
         <div class="glass w-full max-w-md rounded-[3rem] p-8 relative">
             <button onclick="closeFilesModal()" class="absolute top-6 left-6 text-white text-xl">✕</button>
             <div class="text-center mb-8">
-                <h2 id="welcomeMessage" class="text-xl font-black text-white"></h2>
-                <p id="activeMonthTitle" class="text-xs text-gray-400 mt-1"></p>
+                <h2 id="welcomeMessage" class="text-xl font-black text-white italic"></h2>
                 <div class="inline-block mt-4 px-4 py-1 rounded-full bg-green-500/20 border border-green-500/50">
-                    <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest">تم تفعيل الاشتراك بنجاح ✅</span>
+                    <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest">تم تفعيل الوصول ✅</span>
                 </div>
             </div>
             <div class="space-y-3" id="filesList"></div>
@@ -52,22 +52,23 @@
     </div>
 
     <script>
+        // إعدادات الرموز المتسلسلة وتاريخ الانتهاء بعد سنة كاملة
         const groups = [
-            { name: "يناير - 01", users: [{ name: "مودير كبير", key: "1236" }] },
-            { name: "فبراير - 02", users: [] },
-            { name: "مارس - 03", users: [] },
-            { name: "أبريل - 04", users: [] },
-            { name: "مايو - 05", users: [] },
-            { name: "يونيو - 06", users: [] },
-            { name: "يوليو - 07", users: [] },
-            { name: "أغسطس - 08", users: [] },
-            { name: "سبتمبر - 09", users: [] },
-            { name: "أكتوبر - 10", users: [] },
-            { name: "نوفمبر - 11", users: [] },
-            { name: "ديسمبر - 12", users: [] }
+            { name: "يناير - 01", key: "moh11", expiry: "2027-01-31" },
+            { name: "فبراير - 02", key: "moh22", expiry: "2027-02-28" },
+            { name: "مارس - 03", key: "moh33", expiry: "2027-03-31" },
+            { name: "أبريل - 04", key: "moh44", expiry: "2027-04-30" },
+            { name: "مايو - 05", key: "moh55", expiry: "2027-05-31" },
+            { name: "يونيو - 06", key: "moh66", expiry: "2027-06-30" },
+            { name: "يوليو - 07", key: "moh77", expiry: "2027-07-31" },
+            { name: "أغسطس - 08", key: "moh88", expiry: "2027-08-31" },
+            { name: "سبتمبر - 09", key: "moh99", expiry: "2027-09-30" },
+            { name: "أكتوبر - 10", key: "moh1010", expiry: "2027-10-31" },
+            { name: "نوفمبر - 11", key: "moh1111", expiry: "2027-11-30" },
+            { name: "ديسمبر - 12", key: "moh1212", expiry: "2027-12-31" }
         ];
 
-        // هنا أضفنا الملفات الأربعة كاملة
+        // روابط الملفات الموحدة
         const files = [
             { n: "Wolf 12.0", id: "3198797563b91b3001f7ac4665ea206b" },
             { n: "Wolf 12.0.1", id: "1ce031952ac54f99bccd6b5f3d64d5d5" },
@@ -77,12 +78,13 @@
 
         let selectedGroup = null;
 
+        // توليد مربعات الأشهر
         const grid = document.getElementById('monthsGrid');
         groups.forEach(g => {
             grid.innerHTML += `
-                <div onclick="openPassBox('${g.name}')" class="glass p-6 rounded-[2rem] text-center cursor-pointer hover:bg-white/5 transition-all">
-                    <div class="text-sm font-black uppercase tracking-tighter">${g.name}</div>
-                    <div class="text-[9px] text-pink-500 font-bold mt-2 italic">اشتراك VIP</div>
+                <div onclick="openPassBox('${g.name}')" class="glass p-8 rounded-[2rem] text-center cursor-pointer hover:scale-105 transition-all active:scale-95 shadow-lg">
+                    <div class="text-sm font-black uppercase tracking-widest text-white">${g.name}</div>
+                    <div class="text-[8px] text-pink-500 font-bold mt-2 tracking-widest italic text-center">اشتراك سنوي VIP</div>
                 </div>
             `;
         });
@@ -96,26 +98,41 @@
 
         function verifyUser() {
             const inputVal = document.getElementById('passInput').value.trim();
-            const user = selectedGroup.users.find(u => u.key === inputVal);
-            if (user) {
+            
+            // دخول المدير (صلاحية كاملة)
+            if (inputVal === "rafa 2027") {
                 document.getElementById('passModal').classList.remove('active');
-                showDownloadLinks(user.name, selectedGroup.name);
+                showDownloadLinks("مرحباً بك يا مدير rafa");
+                return;
+            }
+
+            // التحقق من الرمز الموحد وتاريخ الانتهاء
+            if (inputVal === selectedGroup.key) {
+                const today = new Date();
+                const expiryDate = new Date(selectedGroup.expiry);
+
+                if (today > expiryDate) {
+                    alert("⚠️ انتهى اشتراك هذه الفئة (مرت سنة كاملة). يرجى التجديد.");
+                    return;
+                }
+
+                document.getElementById('passModal').classList.remove('active');
+                showDownloadLinks("تم تفعيل اشتراك VIP ✅");
             } else {
-                alert("عذراً، لا يوجد اشتراك مفعل لهذا الكود في شهر " + selectedGroup.name);
+                alert("الرمز غير صحيح لهذه الفئة!");
             }
         }
 
-        function showDownloadLinks(userName, monthName) {
-            document.getElementById('welcomeMessage').innerText = "أهلاً بك، " + userName;
-            document.getElementById('activeMonthTitle').innerText = "تم التحقق من شهر " + monthName;
+        function showDownloadLinks(message) {
+            document.getElementById('welcomeMessage').innerText = message;
             const list = document.getElementById('filesList');
             list.innerHTML = '';
             files.forEach(f => {
                 list.innerHTML += `
                     <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F${f.id}" 
-                       class="flex items-center justify-between bg-white/5 p-5 rounded-2xl border border-white/5 transition-all active:scale-95">
-                        <span class="text-[12px] font-black italic tracking-wide">${f.n}</span>
-                        <span class="text-[10px] font-black wolf-gradient px-4 py-2 rounded-xl shadow-lg text-white">تثبيت الآن</span>
+                       class="flex items-center justify-between bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all active:scale-95">
+                        <span class="text-[12px] font-black italic tracking-wider">${f.n}</span>
+                        <span class="text-[10px] font-black wolf-gradient px-4 py-2 rounded-xl shadow-lg text-white">تثبيت</span>
                     </a>
                 `;
             });
