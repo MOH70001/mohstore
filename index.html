@@ -14,9 +14,7 @@
         .modal.active { display: flex; }
     </style>
 </head>
-<body class="p-6">
-
-    <header class="text-center my-10">
+<body class="p-6 pb-32"> <header class="text-center my-10">
         <div class="inline-block p-[2px] rounded-full wolf-gradient mb-4">
             <div class="bg-[#02040a] rounded-full p-2">
                 <img src="Logo.png.JPG" class="w-20 h-20 object-contain rounded-full" onerror="this.src='wolf.png.JPG'">
@@ -27,6 +25,14 @@
     </header>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto" id="monthsGrid"></div>
+
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-xs px-4">
+        <a href="https://wa.me/966538506619" target="_blank" 
+           class="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white py-4 rounded-2xl shadow-[0_10px_30px_rgba(37,211,102,0.3)] transition-all active:scale-95 font-bold italic text-sm">
+            <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.165 1.237 8.413 3.484 2.248 2.248 3.484 5.237 3.484 8.415 0 6.556-5.332 11.887-11.888 11.887-2.019 0-4.003-.513-5.767-1.485l-6.229 1.696zm6.069-4.303l.369.219c1.61.955 3.478 1.459 5.4 1.459 5.732 0 10.395-4.663 10.395-10.395s-4.663-10.395-10.395-10.395-10.395 4.663-10.395 10.395c0 2.062.583 4.072 1.687 5.824l.24.379-1.107 4.04 4.14-1.128zm10.748-7.357c-.246-.123-1.458-.719-1.684-.8-.226-.081-.391-.123-.555.123-.164.246-.636.8-.78 0-.144-.164-.288-.205-.534-.328-.246-.123-.746-.35-1.408-.94-.515-.458-.863-1.025-.964-1.189-.101-.164-.011-.252.089-.373.09-.109.205-.246.308-.369.103-.123.136-.205.205-.344.068-.14.034-.26-.017-.384-.052-.123-.555-1.339-.76-1.832-.2-.48-.403-.414-.555-.421-.143-.007-.308-.008-.472-.008-.164 0-.432.061-.657.307-.226.246-.863.843-.863 2.054 0 1.21.882 2.38 1.005 2.545.123.164 1.734 2.648 4.199 3.712.586.254 1.044.405 1.4.517.589.187 1.125.161 1.549.097.472-.072 1.458-.596 1.664-1.172.206-.576.206-1.07.144-1.172-.062-.103-.226-.164-.472-.286z"/></svg>
+            تواصل مع الدعم الفني
+        </a>
+    </div>
 
     <div id="passModal" class="modal">
         <div class="glass w-full max-w-sm rounded-[2.5rem] p-10 text-center">
@@ -52,23 +58,21 @@
     </div>
 
     <script>
-        // إعدادات الرموز المتسلسلة وتاريخ الانتهاء بعد سنة كاملة
         const groups = [
-            { name: "يناير - 01", key: "moh11", expiry: "2027-01-31" },
-            { name: "فبراير - 02", key: "moh22", expiry: "2027-02-28" },
-            { name: "مارس - 03", key: "moh33", expiry: "2027-03-31" },
-            { name: "أبريل - 04", key: "moh44", expiry: "2027-04-30" },
-            { name: "مايو - 05", key: "moh55", expiry: "2027-05-31" },
-            { name: "يونيو - 06", key: "moh66", expiry: "2027-06-30" },
-            { name: "يوليو - 07", key: "moh77", expiry: "2027-07-31" },
-            { name: "أغسطس - 08", key: "moh88", expiry: "2027-08-31" },
-            { name: "سبتمبر - 09", key: "moh99", expiry: "2027-09-30" },
-            { name: "أكتوبر - 10", key: "moh1010", expiry: "2027-10-31" },
-            { name: "نوفمبر - 11", key: "moh1111", expiry: "2027-11-30" },
-            { name: "ديسمبر - 12", key: "moh1212", expiry: "2027-12-31" }
+            { name: "يناير - 01", key: "moh011", expiry: "2027-01-31" },
+            { name: "فبراير - 02", key: "moh090", expiry: "2027-02-28" },
+            { name: "مارس - 03", key: "moh070", expiry: "2027-03-31" },
+            { name: "أبريل - 04", key: "moh333", expiry: "2027-04-30" },
+            { name: "مايو - 05", key: "moh327", expiry: "2027-05-31" },
+            { name: "يونيو - 06", key: "moh891", expiry: "2027-06-30" },
+            { name: "يوليو - 07", key: "moh354", expiry: "2027-07-31" },
+            { name: "أغسطس - 08", key: "moh790", expiry: "2027-08-31" },
+            { name: "سبتمبر - 09", key: "moh369", expiry: "2027-09-30" },
+            { name: "أكتوبر - 10", key: "moh589", expiry: "2027-10-31" },
+            { name: "نوفمبر - 11", key: "moh373", expiry: "2027-11-30" },
+            { name: "ديسمبر - 12", key: "moh893", expiry: "2027-12-31" }
         ];
 
-        // روابط الملفات الموحدة
         const files = [
             { n: "Wolf 12.0", id: "3198797563b91b3001f7ac4665ea206b" },
             { n: "Wolf 12.0.1", id: "1ce031952ac54f99bccd6b5f3d64d5d5" },
@@ -78,13 +82,12 @@
 
         let selectedGroup = null;
 
-        // توليد مربعات الأشهر
         const grid = document.getElementById('monthsGrid');
         groups.forEach(g => {
             grid.innerHTML += `
                 <div onclick="openPassBox('${g.name}')" class="glass p-8 rounded-[2rem] text-center cursor-pointer hover:scale-105 transition-all active:scale-95 shadow-lg">
                     <div class="text-sm font-black uppercase tracking-widest text-white">${g.name}</div>
-                    <div class="text-[8px] text-pink-500 font-bold mt-2 tracking-widest italic text-center">اشتراك سنوي VIP</div>
+                    <div class="text-[8px] text-pink-500 font-bold mt-2 tracking-widest italic">اشتراك سنوي VIP</div>
                 </div>
             `;
         });
@@ -98,24 +101,18 @@
 
         function verifyUser() {
             const inputVal = document.getElementById('passInput').value.trim();
-            
-            // دخول المدير (صلاحية كاملة)
             if (inputVal === "rafa 2027") {
                 document.getElementById('passModal').classList.remove('active');
                 showDownloadLinks("مرحباً بك يا مدير rafa");
                 return;
             }
-
-            // التحقق من الرمز الموحد وتاريخ الانتهاء
             if (inputVal === selectedGroup.key) {
                 const today = new Date();
                 const expiryDate = new Date(selectedGroup.expiry);
-
                 if (today > expiryDate) {
-                    alert("⚠️ انتهى اشتراك هذه الفئة (مرت سنة كاملة). يرجى التجديد.");
+                    alert("⚠️ انتهى اشتراك هذه الفئة. يرجى التجديد.");
                     return;
                 }
-
                 document.getElementById('passModal').classList.remove('active');
                 showDownloadLinks("تم تفعيل اشتراك VIP ✅");
             } else {
