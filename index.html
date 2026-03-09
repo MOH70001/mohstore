@@ -2,137 +2,186 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOH STORE | VIP SYSTEM</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Cairo', sans-serif; background: #02040a; color: white; min-height: 100vh; margin: 0; overflow-x: hidden; }
-        .wolf-gradient { background: linear-gradient(135deg, #ff8a05 0%, #ff05a0 50%, #0570ff 100%); }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .month-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .month-card:hover { transform: translateY(-8px); border-color: rgba(255, 138, 5, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        .status-dot { width: 6px; height: 6px; background: #25D366; border-radius: 50%; display: inline-block; box-shadow: 0 0 12px #25D366; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
-        .modal.active { display: flex; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .custom-scroll::-webkit-scrollbar { width: 5px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        :root {
+            --primary-gold: #d4af37;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+            --text-gray: #b0b0b0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* حاوية المحتوى الرئيسي */
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* تصميم اللوجو */
+        .logo-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .logo-container img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        /* النصوص العناوين */
+        h1 {
+            font-size: 2.5rem;
+            margin: 10px 0;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--primary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vip-status {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+
+        /* أزرار الخدمات / الفئات */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 50px;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            border-color: var(--primary-gold);
+            background: #1f1f1f;
+            transform: translateY(-5px);
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebe57;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        /* الفوتر وعداد الزوار */
+        footer {
+            background-color: #000;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid var(--primary-gold);
+        }
+
+        .visitor-section {
+            display: inline-block;
+            background: #111;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #222;
+        }
+
+        .visitor-label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .footer-copyright {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            color: #444;
+        }
+
     </style>
 </head>
-<body class="p-4 pb-32">
+<body>
 
-    <header class="text-center my-12">
-        <div class="inline-block p-[3px] rounded-full wolf-gradient mb-6 shadow-[0_0_30px_rgba(255,138,5,0.3)]">
-            <div class="bg-[#02040a] rounded-full p-2">
-                <img src="Logo.png.JPG" class="w-24 h-24 object-cover rounded-full" onerror="this.src='wolf.png.JPG'">
+    <div class="container">
+        <div class="logo-container">
+            <img src="Logo.png.JPG" alt="MOH STORE">
+        </div>
+
+        <h1>MOH STORE</h1>
+        <div class="vip-status">PRIVATE ACCESS • VIP SYSTEM</div>
+
+        <div class="categories">
+            <div class="category-card">
+                <i class="fas fa-gem" style="color: var(--primary-gold); margin-bottom: 10px; font-size: 1.5rem;"></i>
+                <h3>اشتراكات VIP</h3>
+                <p style="font-size: 0.8rem; color: #888;">وصول حصري لأقوى الأنظمة والبرامج</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-download" style="color: #3498db; margin-bottom: 10px; font-size: 1.5rem;"></i>
+                <h3>تطبيقات معدلة</h3>
+                <p style="font-size: 0.8rem; color: #888;">تحميل مباشر بضغطة زر واحدة</p>
             </div>
         </div>
-        <h1 class="text-5xl font-black italic bg-gradient-to-r from-[#ff8a05] via-[#ff05a0] to-[#0570ff] bg-clip-text text-transparent uppercase tracking-tighter">MOH STORE</h1>
-        <p class="text-[11px] text-gray-500 mt-3 tracking-[0.4em] font-bold">PRIVATE ACCESS • VIP SYSTEM</p>
-    </header>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto" id="monthsGrid"></div>
-
-    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-xs px-6">
-        <a href="https://wa.me/966538506619" target="_blank" 
-           class="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1eb954] text-white py-4 rounded-[2rem] shadow-[0_15px_40px_rgba(37,211,102,0.4)] transition-all active:scale-90 font-black italic text-sm border-t border-white/20">
-            <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.165 1.237 8.413 3.484 2.248 2.248 3.484 5.237 3.484 8.415 0 6.556-5.332 11.887-11.888 11.887-2.019 0-4.003-.513-5.767-1.485l-6.229 1.696zm6.069-4.303l.369.219c1.61.955 3.478 1.459 5.4 1.459 5.732 0 10.395-4.663 10.395-10.395s-4.663-10.395-10.395-10.395-10.395 4.663-10.395 10.395c0 2.062.583 4.072 1.687 5.824l.24.379-1.107 4.04 4.14-1.128zm10.748-7.357c-.246-.123-1.458-.719-1.684-.8-.226-.081-.391-.123-.555.123-.164.246-.636.8-.78 0-.144-.164-.288-.205-.534-.328-.246-.123-.746-.35-1.408-.94-.515-.458-.863-1.025-.964-1.189-.101-.164-.011-.252.089-.373.09-.109.205-.246.308-.369.103-.123.136-.205.205-.344.068-.14.034-.26-.017-.384-.052-.123-.555-1.339-.76-1.832-.2-.48-.403-.414-.555-.421-.143-.007-.308-.008-.472-.008-.164 0-.432.061-.657.307-.226.246-.863.843-.863 2.054 0 1.21.882 2.38 1.005 2.545.123.164 1.734 2.648 4.199 3.712.586.254 1.044.405 1.4.517.589.187 1.125.161 1.549.097.472-.072 1.458-.596 1.664-1.172.206-.576.206-1.07.144-1.172-.062-.103-.226-.164-.472-.286z"/></svg>
-            تواصل معي
+        <a href="https://wa.me/966538506619" class="btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> تواصل للاشتراك
         </a>
     </div>
 
-    <div id="passModal" class="modal">
-        <div class="glass w-full max-w-sm rounded-[3rem] p-10 text-center border-t border-white/20">
-            <h2 id="targetMonth" class="text-2xl font-black mb-2 italic text-white uppercase"></h2>
-            <input type="text" id="passInput" placeholder="أدخل الرمز" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 text-center text-white text-3xl mb-8 outline-none focus:border-[#ff8a05] transition-all font-black">
-            <button onclick="verifyUser()" class="wolf-gradient w-full py-5 rounded-2xl font-black text-white uppercase italic">تأكيد الدخول</button>
-            <button onclick="closePassModal()" class="mt-8 text-[10px] text-gray-500 font-bold uppercase cursor-pointer tracking-[0.3em]">إغلاق</button>
+    <footer>
+        <div class="visitor-section">
+            <span class="visitor-label"><i class="fas fa-users"></i> إحصائيات المتجر</span>
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fmoh70001.github.io%2FMOHSTORE&count_bg=%23d4af37&title_bg=%23222222&icon=&icon_color=%23E7E7E7&title=الزوار&edge_flat=false" alt="Visitor Counter"/>
         </div>
-    </div>
-
-    <div id="filesModal" class="modal">
-        <div class="glass w-full max-w-md rounded-[3.5rem] p-8 relative border-t border-white/20 shadow-2xl">
-            <button onclick="closeFilesModal()" class="absolute top-8 left-8 text-gray-400 hover:text-white">✕</button>
-            <div class="text-center mb-10">
-                <h2 id="welcomeMessage" class="text-2xl font-black text-white italic uppercase tracking-tighter"></h2>
-            </div>
-            <div class="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scroll" id="filesList"></div>
+        <div class="footer-copyright">
+            &copy; 2024 MOH STORE. Developed with Excellence.
         </div>
-    </div>
+    </footer>
 
-    <script>
-        const groups = [
-            { name: "يناير - 01", key: "moh011", expiry: "2027-01-31" },
-            { name: "فبراير - 02", key: "moh090", expiry: "2027-02-28" },
-            { name: "مارس - 03", key: "moh070", expiry: "2027-03-31" },
-            { name: "أبريل - 04", key: "moh333", expiry: "2027-04-30" },
-            { name: "مايو - 05", key: "moh327", expiry: "2027-05-31" },
-            { name: "يونيو - 06", key: "moh891", expiry: "2027-06-30" },
-            { name: "يوليو - 07", key: "moh354", expiry: "2027-07-31" },
-            { name: "أغسطس - 08", key: "moh790", expiry: "2027-08-31" },
-            { name: "سبتمبر - 09", key: "moh369", expiry: "2027-09-30" },
-            { name: "أكتوبر - 10", key: "moh589", expiry: "2027-10-31" },
-            { name: "نوفمبر - 11", key: "moh373", expiry: "2027-11-30" },
-            { name: "ديسمبر - 12", key: "moh893", expiry: "2027-12-31" }
-        ];
-
-        // تم استعادة جميع الروابط الأربعة هنا
-        const files = [
-            { n: "Wolf 12.0", id: "3198797563b91b3001f7ac4665ea206b" },
-            { n: "Wolf 12.0.1", id: "1ce031952ac54f99bccd6b5f3d64d5d5" },
-            { n: "Wolf 12.0.2", id: "4498deea9dac4127eef6e6ffdf02dc45" },
-            { n: "Wolf 12.0.3", id: "fd9dcab4f9a4dbfe401a706889149747" }
-        ];
-
-        let selectedGroup = null;
-        const grid = document.getElementById('monthsGrid');
-        groups.forEach(g => {
-            const parts = g.name.split(' - ');
-            grid.innerHTML += `
-                <div onclick="openPassBox('${g.name}')" class="month-card p-8 rounded-[2.5rem] text-center cursor-pointer group border-t border-white/5">
-                    <div class="mb-4 opacity-40 group-hover:opacity-100 transition-all"><span class="status-dot"></span></div>
-                    <div class="text-xl font-black uppercase text-white group-hover:text-[#ff8a05] transition-colors tracking-tighter">
-                        ${parts[0]}<span class="block text-[9px] text-gray-500 font-bold mt-1 opacity-60 tracking-[0.3em]">${parts[1]}</span>
-                    </div>
-                </div>`;
-        });
-
-        function openPassBox(monthName) {
-            selectedGroup = groups.find(g => g.name === monthName);
-            document.getElementById('targetMonth').innerText = monthName;
-            document.getElementById('passInput').value = "";
-            document.getElementById('passModal').classList.add('active');
-        }
-
-        function verifyUser() {
-            const inputVal = document.getElementById('passInput').value.trim();
-            if (inputVal === "rafa 2027" || inputVal === selectedGroup.key) {
-                document.getElementById('passModal').classList.remove('active');
-                showDownloadLinks("ACCESS ACTIVATED ✅");
-            } else { alert("الرمز غير صحيح!"); }
-        }
-
-        function showDownloadLinks(message) {
-            document.getElementById('welcomeMessage').innerText = message;
-            const list = document.getElementById('filesList');
-            list.innerHTML = '';
-            files.forEach(f => {
-                list.innerHTML += `
-                    <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fplist%2F${f.id}" 
-                       class="flex items-center justify-between bg-white/5 p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all active:scale-95 group">
-                        <div class="flex flex-col">
-                            <span class="text-[13px] font-black italic text-white">${f.n}</span>
-                        </div>
-                        <span class="text-[10px] font-black wolf-gradient px-5 py-2.5 rounded-2xl text-white uppercase">تثبيت</span>
-                    </a>`;
-            });
-            document.getElementById('filesModal').classList.add('active');
-        }
-
-        function closePassModal() { document.getElementById('passModal').classList.remove('active'); }
-        function closeFilesModal() { document.getElementById('filesModal').classList.remove('active'); }
-    </script>
 </body>
 </html>
